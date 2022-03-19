@@ -1,10 +1,13 @@
 import './App.css';
+import LinkForm from './components/LinkForm';
+import Links from './components/Links';
 
 function App() {
   return (
-    <div>
-      <h1>Hello world</h1>
-    </div>
+    <>
+      <Links/>
+      <LinkForm/>
+    </>
   );
 }
 
