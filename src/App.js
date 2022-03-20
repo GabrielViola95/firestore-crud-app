@@ -1,20 +1,20 @@
-import { Links } from "./components/Links";
-import { LinkForm } from "./components/LinkForm";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { WebsiteList } from "./components/WebsiteList";
+import { WebsiteForm } from "./components/WebsiteForm";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Links />} />
-          <Route path="add" element={<LinkForm />} />
-          <Route path="edit/:id" element={<LinkForm />} />
+          <Route path="/" element={<WebsiteList />} />
+          <Route path="add" element={<WebsiteForm />} />
+          <Route path="edit/:id" element={<WebsiteForm />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
