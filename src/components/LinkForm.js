@@ -8,7 +8,7 @@ import edit_black from '../assets/edit_black.svg';
         description: "",
     }
 
-const LinkForm = ({addTask}) => {
+const LinkForm = ({addTask, data}) => {
 
     const [values, setValues] = useState(initialStateValues);
 
@@ -16,6 +16,8 @@ const LinkForm = ({addTask}) => {
         e.preventDefault();
         console.log(values);
         addTask(values);
+        setValues(data.docs.map((doc)=>({...doc.data(), id: doc.id
+        })))
     };
 
     const handleInputChange = (e)=> {
