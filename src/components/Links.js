@@ -1,23 +1,32 @@
-import React from 'react';
-import LinkForm from './LinkForm';
-import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+import { getLinks } from "../firebase/firebaseApi";
+import { LinkCard } from "./LinkCard";
 
+export const WebsiteList = () => {
+  const [websites, setWebsites] = useState([]);
 
-const Links = () => {
+  const getLinks = async () => {
+    const querySnapshot = await getWebsites();
+    // onGetLinks((querySnapshot) => {
+    const docs = [];
+    querySnapshot.forEach((doc) => {
+      docs.push({ ...doc.data(), id: doc.id });
+    });
+    setWebsites(docs);
+    // });
+  };
 
-  const usersCollectionRef = collection(db, "Links");
-
-    const addTask = async () => {
-        const data = await getDocs(usersCollectionRef)
-        console.log(data)
-    }
+  useEffect(() => {
+    getLinks();
+  }, []);
 
   return (
-    <div className='container p-4'>
-        <LinkForm addTask={addTask} />
-    </div>
-  )
-}
-
-export default Links
+    <>
+      {websites.map((link) => (
+        <div className="col-md-4" key={link.id}>
+          <LinkCard link={link} />
+        </div>
+      ))}
+    </>
+  );
+};
